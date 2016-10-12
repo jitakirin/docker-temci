@@ -17,4 +17,7 @@
 FROM python:3
 MAINTAINER jitakirin <jitakirin@gmail.com>
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends time \
+	&& rm -rf /var/lib/apt/lists/*
 RUN pip3 install temci
