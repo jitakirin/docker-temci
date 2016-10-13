@@ -1,13 +1,17 @@
+[![docker image](https://img.shields.io/docker/stars/jitakirin/temci.svg)](https://hub.docker.com/r/jitakirin/temci/)
+
 # docker-temci
-advanced benchmarking tool written in python3
+Docker image containing [temci] - an advanced benchmarking tool written
+in python3.
 
 # usage
-The entrypoint will run temci, so you can run:
+The entrypoint will run [temci], so you can run:
 
     docker run -it --rm --volume=$PWD:/src jitakirin/temci --help
-    docker run -it --rm --volume=$PWD:/src jitakirin/temci short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml
+    docker run -it --rm --volume=$PWD:/src jitakirin/temci \
+      short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml
 
-you can also run multiple temci commands in batch by separating them
+you can also run multiple [temci] commands in batch by separating them
 with a ';' (make sure to escape it):
 
     docker run -it --rm --volume=$PWD:/src jitakirin/temci \
@@ -49,3 +53,5 @@ These two examples are equivalent.
 run tests with:
 
     docker run -it --rm --volume=$PWD:/src --workdir=/src dduportal/bats test
+
+[temci]: http://temci.readthedocs.io/en/latest/
