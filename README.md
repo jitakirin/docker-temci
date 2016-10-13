@@ -14,6 +14,13 @@ with a ';' (make sure to escape it):
       short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml \;
       report --reporter console ls_test.yaml
 
+If you need to prepare your source (build, install, etc.) pass a script
+via SETUP env variable:
+
+    docker run -it --rm --volume=$PWD:/src jitakirin/temci \
+      --env=SETUP='pip install -e .' \
+      short exec -wd 'python -c "print(__name__)"' --runs 10 --out py_test.yaml
+
 # tests
 run tests with:
 

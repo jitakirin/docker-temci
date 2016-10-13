@@ -15,29 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+load "${BATS_TEST_DIRNAME}/common.bash"
+
 temci_run="${BATS_TEST_DIRNAME}/../temci-run.sh"
-mock_dir="${BATS_TEST_DIRNAME}/mock"
-
-setup() {
-  if [[ ${PATH} == *${mock_dir}:* ]]; then
-    return 0
-  fi
-  export PATH="${mock_dir}:${PATH}"
-}
-
-teardown() {
-  if [[ ${PATH} == *${mock_dir}:* ]]; then
-    export PATH="${PATH/${mock_dir}:/}"
-  fi
-
-  {
-    #echo "status: ${status}"  # status seems to be reset here
-    echo "output: '${output}'"
-    echo "lines=("
-    printf '  "%s"\n' "${lines[@]}"
-    echo ")"
-  } >&2
-}
 
 @test "no arguments passed to temci which prints usage instructions" {
   run "${temci_run}"
