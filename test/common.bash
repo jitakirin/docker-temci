@@ -45,7 +45,9 @@ teardown() {
     #echo "status: ${status}"  # status seems to be reset here
     echo "output: '${output}'"
     echo "lines=("
-    printf '  "%s"\n' "${lines[@]}"
+    for i in ${!lines[@]}; do
+      printf '  [%d]="%s"\n' ${i} "${lines[i]}"
+    done
     echo ")"
   } >&2
 }
