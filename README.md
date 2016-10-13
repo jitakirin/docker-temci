@@ -21,8 +21,8 @@ with a ';' (make sure to escape it):
 If you need to prepare your source (build, install, etc.) pass a script
 via SETUP env variable:
 
-    docker run -it --rm --volume=$PWD:/src jitakirin/temci \
-      --env=SETUP='pip install -e .' \
+    docker run -it --rm --volume=$PWD:/src \
+      --env=SETUP='pip install -e .' jitakirin/temci \
       short exec -wd 'python -c "print(__name__)"' --runs 10 --out py_test.yaml
 
 ## Serving reports
@@ -34,16 +34,16 @@ Enable by passing SERVE_REPORT env variable.  It can be set to path to
 the YAML file containing results, in which case a HTML report will be
 produced with default options and then served over HTTP:
 
-    docker run -it --rm --volume=$PWD:/src jitakirin/temci \
-      --env=SERVE_REPORT=ls_test.yaml
+    docker run -it --rm --volume=$PWD:/src \
+      --env=SERVE_REPORT=ls_test.yaml jitakirin/temci \
       short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml
 
 Or if you want more control over how the report is generated, you can
 set it to a path to a directory and generate the report into that
 directory directly:
 
-    docker run -it --rm --volume=$PWD:/src jitakirin/temci \
-      --env=SERVE_REPORT=/tmp/ls_test
+    docker run -it --rm --volume=$PWD:/src \
+      --env=SERVE_REPORT=/tmp/ls_test jitakirin/temci \
       short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml \; \
       report --html2_out /tmp/ls_test ls_test.yaml
 
