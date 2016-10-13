@@ -21,3 +21,8 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends time \
 	&& rm -rf /var/lib/apt/lists/*
 RUN pip3 install temci
+
+ADD docker-init.sh temci-run.sh /usr/local/bin/
+
+WORKDIR /src
+ENTRYPOINT ["/usr/local/bin/docker-init.sh"]

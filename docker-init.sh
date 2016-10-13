@@ -24,4 +24,4 @@ if [[ -n $SETUP ]]; then
 fi
 
 # All args are passed to temci
-temci "$@"
+temci-run.sh "$@"
