@@ -29,7 +29,7 @@ temci-run.sh "$@"
 if [[ -n ${SERVE_REPORT} && ! -d ${SERVE_REPORT} ]]; then
   # generate a report from specified YAML file
   repdir="$(mktemp -d --tmpdir temci-report.XXXXXXXXXX)"
-  temci report --html2_out "${repdir}" "${SERVE_REPORT}"
+  temci report --html2_force_override --html2_out "${repdir}" "${SERVE_REPORT}"
   SERVE_REPORT="${repdir}"
 fi
 

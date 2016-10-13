@@ -51,10 +51,11 @@ dkr_init="${BATS_TEST_DIRNAME}/../docker-init.sh"
   [[ ${lines[5]} == 'temci:argv[6]="foo_test.yaml"' ]]
 
   [[ ${lines[6]} == 'temci:argv[1]="report"' ]]
-  [[ ${lines[7]} == 'temci:argv[2]="--html2_out"' ]]
-  [[ ${lines[9]} == 'temci:argv[4]="foo_test.yaml"' ]]
+  [[ ${lines[7]} == 'temci:argv[2]="--html2_force_override"' ]]
+  [[ ${lines[8]} == 'temci:argv[3]="--html2_out"' ]]
+  [[ ${lines[10]} == 'temci:argv[5]="foo_test.yaml"' ]]
 
-  [[ ${lines[10]} == 'Serving HTTP on'* ]]
+  [[ ${lines[11]} == 'Serving HTTP on'* ]]
 }
 
 @test "it runs a HTTP server when SERVE_REPORT specifies a directory name" {
