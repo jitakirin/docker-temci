@@ -38,3 +38,31 @@ dkr_init="${BATS_TEST_DIRNAME}/../docker-init.sh"
   (( status == 1 ))
   [[ ${output} == "" ]]
 }
+
+@test "it produces report and runs a HTTP server when SERVE_REPORT specifies a result (YAML) file" {
+  SERVE_REPORT=foo_test.yaml run "${dkr_init}" short exec -wd ls --out foo_test.yaml
+
+  (( status == 0 ))
+  [[ ${lines[0]} == 'temci:argv[1]="short"' ]]
+  [[ ${lines[1]} == 'temci:argv[2]="exec"' ]]
+  [[ ${lines[2]} == 'temci:argv[3]="-wd"' ]]
+  [[ ${lines[3]} == 'temci:argv[4]="ls"' ]]
+  [[ ${lines[4]} == 'temci:argv[5]="--out"' ]]
+  [[ ${lines[5]} == 'temci:argv[6]="foo_test.yaml"' ]]
+
+  [[ ${lines[6]} == 'temci:argv[1]="report"' ]]
+  [[ ${lines[7]} == 'temci:argv[2]="--html2_out"' ]]
+  [[ ${lines[9]} == 'temci:argv[4]="foo_test.yaml"' ]]
+
+  [[ ${lines[10]} == 'Serving HTTP on'* ]]
+}
+
+@test "it runs a HTTP server when SERVE_REPORT specifies a directory name" {
+  SERVE_REPORT="${BATS_TEST_DIRNAME}" run "${dkr_init}" report --html2_out "${BATS_TEST_DIRNAME}"
+
+  (( status == 0 ))
+  [[ ${lines[0]} == 'temci:argv[1]="report"' ]]
+  [[ ${lines[1]} == 'temci:argv[2]="--html2_out"' ]]
+
+  [[ ${lines[3]} == 'Serving HTTP on'* ]]
+}

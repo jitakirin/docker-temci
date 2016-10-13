@@ -15,26 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-set -e ${VERBOSE:+-x}
-
-# We assume source of the program to benchmark is in CWD
-# Prepare the source
-if [[ -n $SETUP ]]; then
-  bash ${VERBOSE:+-x} -c "${SETUP}"
+# a proxy for tests
+# will just run python as usual, unless parameters to start a web
+# server are passed in which case it'll ignore them
+if [[ $* == *"-m http.server"* ]]; then
+  echo Serving HTTP on 0.0.0.0 port 8000 ...
+  exit
 fi
 
-# All args are passed to temci
-temci-run.sh "$@"
-
-if [[ -n ${SERVE_REPORT} && ! -d ${SERVE_REPORT} ]]; then
-  # generate a report from specified YAML file
-  repdir="$(mktemp -d --tmpdir temci-report.XXXXXXXXXX)"
-  temci report --html2_out "${repdir}" "${SERVE_REPORT}"
-  SERVE_REPORT="${repdir}"
-fi
-
-if [[ -d ${SERVE_REPORT} ]]; then
-  # serve an existing report direcory
-  cd "${SERVE_REPORT}"
-  exec python -m http.server
-fi
+exec python "$@"
