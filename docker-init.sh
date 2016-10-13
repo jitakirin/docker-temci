@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-set -e "${VERBOSE:+-x}"
+set -e ${VERBOSE:+-x}
 
 # We assume source of the program to benchmark is in CWD
 # Prepare the source
 if [[ -n $SETUP ]]; then
-  bash "${VERBOSE:+-x}" -c "${SETUP}"
+  bash ${VERBOSE:+-x} -c "${SETUP}"
 fi
 
 # All args are passed to temci
