@@ -11,7 +11,7 @@ you can also run multiple temci commands in batch by separating them
 with a ';' (make sure to escape it):
 
     docker run -it --rm --volume=$PWD:/src jitakirin/temci \
-      short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml \;
+      short exec -wd 'ls -lt /usr/bin/' --runs 10 --out ls_test.yaml \; \
       report --reporter console ls_test.yaml
 
 If you need to prepare your source (build, install, etc.) pass a script
