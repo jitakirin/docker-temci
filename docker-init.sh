@@ -36,5 +36,6 @@ fi
 if [[ -d ${SERVE_REPORT} ]]; then
   # serve an existing report direcory
   cd "${SERVE_REPORT}"
+  ln -s report.html index.html
   exec python -m http.server
 fi

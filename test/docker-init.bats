@@ -59,11 +59,13 @@ dkr_init="${BATS_TEST_DIRNAME}/../docker-init.sh"
 }
 
 @test "it runs a HTTP server when SERVE_REPORT specifies a directory name" {
-  SERVE_REPORT="${BATS_TEST_DIRNAME}" run "${dkr_init}" report --html2_out "${BATS_TEST_DIRNAME}"
+  SERVE_REPORT="${BATS_TMPDIR}" run "${dkr_init}" report --html2_out "${BATS_TMPDIR}"
 
   (( status == 0 ))
   [[ ${lines[0]} == 'temci:argv[1]="report"' ]]
   [[ ${lines[1]} == 'temci:argv[2]="--html2_out"' ]]
 
   [[ ${lines[3]} == 'Serving HTTP on'* ]]
+
+  [[ -f ${BATS_TMPDIR}/index.html || -L ${BATS_TMPDIR}/index.html ]]
 }
