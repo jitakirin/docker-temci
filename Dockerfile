@@ -25,4 +25,5 @@ RUN pip3 install temci
 ADD docker-init.sh temci-run.sh /usr/local/bin/
 
 WORKDIR /src
+EXPOSE 8000
 ENTRYPOINT ["/usr/local/bin/docker-init.sh"]
